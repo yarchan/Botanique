@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Botanique</title>
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/analytics.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__wrapper">
+      <img class="header__ico" src="./assets/logo.svg" alt="">
+      <nav class="header__nav">
+        <div class="header__nav-title" onclick="loadPage('./pages/main.html')">Главная</div>
+        <div class="header__nav-title header__nav-choose" onclick="loadPage('./pages/analytics.html')">Аналитика</div>
+      </nav>
+      <img class="header__profile" src="./assets/ava.svg" alt="">
+    </div>
+  </header> 
+  <div id="pageContent">
+  </div>
+  <script src="./scripts/script.js" type="module"></script>
+</body>
+</html>

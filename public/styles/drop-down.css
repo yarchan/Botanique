@@ -1,0 +1,7 @@
+.dropdown-list {
+  height: 0;
+}
+
+.show {
+  display: block !important;
+}
