@@ -9,7 +9,7 @@ const createDeviceDesckriptionList = (device) => {
   const typeWorks = device.type_works;
   const works = device.works;
   const userName = device.user_name;
-  const checked = device.checked === true ? './assets/check.svg' : ''
+  const checked = device.checked === true ? './public/assets/check.svg' : ''
   const phrases = works.split(',');
   const formatPhrase = (phrase) => {
     const [key, value] = phrase.split(': **');

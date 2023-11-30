@@ -2,7 +2,7 @@ import { baseApi } from './base-api.js';
 
 const createDeviceListItem = (device) => {
   const statusText = device.status ? 'Свободен' : 'Занят';
-  const noticeImg = device.notice === '1' ? './assets/notice.svg' : (device.notice === '2' ? './assets/non-notice.svg' : './assets/unnotice.svg');
+  const noticeImg = device.notice === '1' ? './public/assets/notice.svg' : (device.notice === '2' ? './public/assets/non-notice.svg' : './public/assets/unnotice.svg');
   const imageData = device.img;
   const listItem = `
     <li id=${device.device_id} class="devices__item">
@@ -13,7 +13,7 @@ const createDeviceListItem = (device) => {
         <button class="devices__dropdown-status" onclick="toggleDropdown()">
           <p class="devices__dropdown-status-text">${statusText}</p> 
           <div id="dropdownArrow" class="devices__dropdown-status-img">
-            <img src="./assets/arrow.svg" alt=""> 
+            <img src="./public/assets/arrow.svg" alt=""> 
           </div>
         </button>
         <ul class="devices__dropdown-list devices__dropdown-list-close" id="dropdownList">
@@ -71,7 +71,7 @@ getDevices()
       if (clickedItem) {
         localStorage.setItem('deviceId',clickedItem.id ) 
         localStorage.setItem('deviceName',clickedItem.querySelector('.devices__item-title').textContent) 
-        goToDescription('./pages/analytics.html');
+        goToDescription('./public/pages/analytics.html');
       }
     });
   })

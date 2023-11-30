@@ -1,7 +1,7 @@
 import {loadModuleScript} from './index.js'
 
 const loadPage = (page) => {
-  loadModuleScript('./scripts/index.js') 
+  loadModuleScript('./public/scripts/index.js') 
     .then(() => {
       import('./index.js')
         .then((indexModule) => {
@@ -18,7 +18,7 @@ const loadPage = (page) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadPage('./pages/main.html')
+  loadPage('./public/pages/main.html')
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const analyticsNavTitle = document.getElementById('analytics');
 
   mainNavTitle.addEventListener('click', () => {
-    loadPage('./pages/main.html');
+    loadPage('./public/pages/main.html');
   });
 
   analyticsNavTitle.addEventListener('click', () => {
-    loadPage('./pages/analytics.html');
+    loadPage('./public/pages/analytics.html');
   });
 });

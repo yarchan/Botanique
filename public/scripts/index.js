@@ -19,7 +19,7 @@ export const loadPage = (page) => {
         document.getElementById('pageContent').innerHTML = content;
         sessionStorage.setItem('page', page);
         const pageName = page.match(/([^/]+)(?=\.\w+$)/)[0];
-        initialization ? loadModuleScript(`./scripts/${pageName}.js`) : reloadScript(`./scripts/${pageName}.js`) 
+        initialization ? loadModuleScript(`./public/scripts/${pageName}.js`) : reloadScript(`./public/scripts/${pageName}.js`) 
         initialization = false
       } else {
         const style = document.createElement('style');
@@ -29,7 +29,7 @@ export const loadPage = (page) => {
     })
     .catch((error) => {
       console.error('Error loading page:', error);
-      loadPage('./pages/error.html');
+      loadPage('./public/pages/error.html');
     });
 };
 
