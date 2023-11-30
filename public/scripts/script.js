@@ -1,18 +1,35 @@
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
+import {loadModuleScript} from './index.js'
+
+const loadPage = (page) => {
+  loadModuleScript('./scripts/index.js') 
+    .then(() => {
+      import('./index.js')
+        .then((indexModule) => {
+          const { loadPage } = indexModule; 
+          loadPage(page);
+        })
+        .catch((error) => {
+          console.error('Ошибка при импорте index.js:', error);
+        });
+    })
+    .catch((error) => {
+      console.error('Ошибка при загрузке index.js:', error);
+    });
 }
 
-Promise.all([
-  loadScript('./scripts/index.js'),
-  loadScript('./scripts/main.js'),
-])
-.then(() => {})
-.catch((error) => {
-  console.error('Ошибка при загрузке скриптов:', error);
+document.addEventListener('DOMContentLoaded', () => {
+  loadPage('./pages/main.html')
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mainNavTitle = document.getElementById('main');
+  const analyticsNavTitle = document.getElementById('analytics');
+
+  mainNavTitle.addEventListener('click', () => {
+    loadPage('./pages/main.html');
+  });
+
+  analyticsNavTitle.addEventListener('click', () => {
+    loadPage('./pages/analytics.html');
+  });
 });

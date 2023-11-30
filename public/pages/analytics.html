@@ -5,7 +5,13 @@
         <div class="analytics__logo">
           <img src="./assets/baggage.svg" alt="" class="">
         </div> 
-        <div class="analytics__title">pH-метр Mettler-Toledo International, Inc. SevenCompact S220</div>
+        <div class="analytics__title">
+          <p id="analytics-title" class="analytics__title-text"></p>
+          <div class="analytics__subtitle">
+            <p class="analytics__subtitle-text">S1.4.I14-9.001</p>
+            <p class="analytics__subtitle-text">00-024004</p>
+          </div>          
+        </div>
       </div>
       <div class="analytics__header-item">
         <div class="analytics__dropdown">
@@ -35,25 +41,38 @@
         </div> 
       </div>
       <div class="analytics__content-datepicker">
-        <div class="analytics__content-datepicker-1"></div>
-        <img src="" alt="">
-        <div class="analytics__content-datepicker2"></div>
+        <div class="analytics__content-datepicker-item">
+          <p id="date-start" class="analytics__content-datepicker-text"></p>
+          <img src="./assets/date-picker.svg" alt="">
+        </div>
+        <div class="analytics__content-datepicker-arrow">
+          <img class="" src="./assets/arrow-next.svg" alt="">
+        </div>
+        <div class="analytics__content-datepicker-item">
+          <p id="date-end" class="analytics__content-datepicker-text"></p>
+          <img src="./assets/date-picker.svg" alt="">
+        </div>
       </div>
       <div class="analytics__content-interval">
-        <div class="analytics__content-interval-item"></div>
-        <div class="analytics__content-interval-item"></div>
-        <div class="analytics__content-interval-item"></div>
-        <div class="analytics__content-interval-item"></div>
-        <div class="analytics__content-interval-item"></div>
-        <div class="analytics__content-interval-item"></div>
+        <div class="analytics__content-interval-item">День</div>
+        <div class="analytics__content-interval-item">Неделя</div>
+        <div class="analytics__content-interval-item analytics__content-interval-item-active">2 недели</div>
+        <div class="analytics__content-interval-item">Месяц</div>
+        <div class="analytics__content-interval-item">3 месяца</div>
+        <div class="analytics__content-interval-item">Полгода</div>
       </div>
       <ul class="analytics__list">
         <li class="analytics__item">
-          <div class="analytics__item-start"></div>
-          <div class="analytics__item-type-work"></div>
-          <div class="analytics__item-works"></div>
-          <div class="analytics__item-result"></div>
-          <div class="analytics__item-user-name"></div>
+          <div class="analytics__item-text">Начало</div>
+          <div class="analytics__item-text">Тип работ</div>
+          <div class="analytics__item-text">Работы</div>
+          <div class="analytics__item-text">
+            <p>Результат</p>
+            <div class="analytics__item-img">
+              <img  src="" alt="">
+            </div>
+          </div>
+          <div class="analytics__item-text">Пользователь</div>
         </li>
       </ul>
     </div>

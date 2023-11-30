@@ -7,6 +7,8 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
+
+
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -28,6 +30,21 @@ app.get('/devices', async (req, res) => {
     res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
+
+app.get('/device_description/:description_id', async (req, res) => {
+  const { description_id } = req.params; 
+  try {
+    const client = await pool.connect();
+    const query = 'SELECT * FROM device_description WHERE description_id = $1'; 
+    const result = await client.query(query, [description_id]);
+    client.release();
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Ошибка при получении данных:', err);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Сервер запущен на порту ${port}`);
