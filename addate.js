@@ -15,30 +15,65 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-async function insertImage() {
-  const imagePath = 'C:/Users/yarkr/Desktop/new/4.svg';
-  const imageBuffer = fs.readFileSync(imagePath); 
+const insertDevices = async () => {
+  const basePath = './capture/';
 
-  const base64String = imageBuffer.toString('base64'); 
+  for (let i = 1; i <= 5; i++) {
+    const imagePath = `${basePath}${i}.svg`;
+    const imageBuffer = fs.readFileSync(imagePath);
+    const base64String = imageBuffer.toString('base64');
+    const titles = ['pH-метр Mettler-Toledo International, Inc. SevenCompact S220','Спектрофотометр Varian, Inc Cary 50 Bio','Титратор ','Коагулометр Tcoag, KC 4 Delta','Коагулометр Tcoag, KC 4 Delta']
 
-  const client = await pool.connect();
+    const randomValue = Math.floor(Math.random() * 3) + 1;
 
-  try {
-    await client.query('BEGIN');
+    const client = await pool.connect();
 
-    const queryText = 'INSERT INTO devices (device_id, name, status, notice, img) VALUES ($1, $2, $3, $4, $5)';
-    const values = ['5', 'Коагулометр Tcoag, KC 4 Delta', true, 4, base64String]; 
+    try {
+      await client.query('BEGIN');
 
-    await client.query(queryText, values);
-    await client.query('COMMIT');
+      const queryText =
+        'INSERT INTO devices ( device_id, name, status, notice, img) VALUES ($1, $2, $3, $4, $5)';
+      const values = [ i.toString(), titles[i], true, randomValue, base64String];
 
-    console.log('SVG-изображение успешно добавлено в базу данных.');
-  } catch (error) {
-    await client.query('ROLLBACK');
-    console.error('Ошибка при добавлении SVG-изображения:', error);
-  } finally {
-    client.release();
+      await client.query(queryText, values);
+      await client.query('COMMIT');
+
+      console.log(`SVG-изображение ${i} успешно добавлено в базу данных.`);
+    } catch (error) {
+      await client.query('ROLLBACK');
+      console.error(`Ошибка при добавлении SVG-изображения ${i}:`, error);
+    } finally {
+      client.release();
+    }
+  }
+}
+const insertDevicesDescription = async () =>{
+
+  for (let i = 1; i <= 5; i++) {
+    const client = await pool.connect();
+
+    try {
+      await client.query('BEGIN');
+
+      const queryText = 'INSERT INTO device_description (description_id, device_id, date_start, type_works, works, result, user_name, checked) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+      const values = [ i.toString(), i.toString(), `200${i}-0${i}-0${i} 1${i}:55:00`, 'Измерение', 'Номер колонки: **Колонка 2**, Образец: **Образец 2**, Образец: **образец 1**, Метод: метов тестовый, Номер колонки: **Колонка 1**', 'Промывка с указанием вещества: Вещество Комментарий: тест успешности', 'moroz', true ];
+
+      await client.query(queryText, values);
+      await client.query('COMMIT');
+
+      console.log(`SVG-изображение ${i} успешно добавлено в базу данных.`);
+    } catch (error) {
+      await client.query('ROLLBACK');
+      console.error(`Ошибка при добавлении данных ${i}:`, error);
+    } finally {
+      client.release();
+    }
   }
 }
 
-insertImage();
+insertDevices().then(()=>{
+  insertDevicesDescription();
+})
+
+// -- INSERT INTO device_description (description_id, device_id, date_start, type_works, works, result, user_name, checked)
+// -- VALUES (6, 4, '2001-01-01 10:55:00', 'Измерение', 'Номер колонки: **Колонка 2**, Образец: **Образец 2**, Образец: **образец 1**, Метод: метов тестовый, Номер колонки: **Колонка 1**', 'Промывка с указанием вещества: Вещество Комментарий: тест успешности', 'moroz', true);
